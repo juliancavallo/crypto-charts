@@ -1,0 +1,96 @@
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+h1,
+h2,
+p {
+  font-family: 'Red Hat Text', sans-serif;
+  color: #303030;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+cards {
+  width: 90%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.btc,
+.cosmos,
+.ethereum {
+  display: -ms-grid;
+  display: grid;
+  min-width: 250px;
+  max-width: 90%;
+  width: 80%;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: minmax(50px, 60px) 1fr;
+      grid-template-rows: minmax(50px, 60px) 1fr;
+  grid-template: "info" "chart";
+  border-radius: 30px;
+  margin: 2% 0px;
+  -webkit-box-shadow: 0px 0px 20px 5px grey;
+          box-shadow: 0px 0px 20px 5px grey;
+}
+
+.asset-info {
+  grid-area: info;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 5% 0 5%;
+}
+
+.title {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+card h1 {
+  margin-left: 10px;
+}
+
+#btcChart,
+#cosmosChart,
+#ethereumChart {
+  grid-area: chart;
+  border-radius: 0px 0px 30px 30px;
+  margin-top: auto;
+}
+/*# sourceMappingURL=styles.css.map */
