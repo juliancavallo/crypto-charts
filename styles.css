@@ -23,6 +23,10 @@ body {
           flex-direction: column;
 }
 
+canvas {
+  width: 100% !important;
+}
+
 .charts {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -38,7 +42,7 @@ body {
 }
 
 .chart {
-  width: 60%;
+  width: 70vw;
   border-radius: 30px;
   margin: 30px;
   -webkit-box-shadow: 0px 0px 20px 5px grey;
@@ -70,20 +74,7 @@ body {
   margin-left: 10px;
 }
 
-canvas {
-  width: 100%;
-}
-
 @media (max-width: 900px) {
-  .chart-info {
-    font-size: 0.7rem;
-  }
-  .chart {
-    width: 80%;
-  }
-}
-
-@media (max-width: 400px) {
   .chart-info {
     font-size: 0.7rem;
   }
@@ -99,8 +90,8 @@ canvas {
 }
 
 .selectBox {
+  padding: 8px 0;
   width: 200px;
-  height: 40px;
   border: 1px solid #303030;
   border-radius: 10px;
   font-weight: bold;
