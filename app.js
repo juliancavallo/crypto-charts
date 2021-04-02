@@ -35,7 +35,13 @@ function checkStatus(response) {
 async function printChart(chart, data, hexColor) {
   let { times, prices } = await data;
 
+  //Clearing the canvas
+  const parent = document.getElementById(chart).parentElement;
+  document.getElementById(chart).remove();
+  parent.innerHTML += `<canvas id="${chart}"></canvas>`;
+
   let ctx = document.getElementById(chart).getContext('2d');
+
 
   let gradient = ctx.createLinearGradient(0, 0, 0, 1000);
 
