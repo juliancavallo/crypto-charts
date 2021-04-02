@@ -1,7 +1,7 @@
 const apiKey = "";//"da9d8380e36af30bb06d3467354651a0f3e850a6569e9baf452aeda5431894a6"
 
 async function returnApiData(currency){
-  const response = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${currency}&tsym=USD&limit=100`);
+  const response = await fetch(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${currency}&tsym=USD&limit=96`);
   const json = await response.json();
   const data = json.Data.Data
   const times = data.map(obj => new Date(obj.time * 1000).toLocaleDateString())
@@ -17,7 +17,7 @@ async function updatePrice(data, element){
   let { times, prices } = await data;
   let currentPrice = prices[prices.length-1].toFixed(2);
 
-  document.getElementById(element).innerHTML = "$" + currentPrice;
+  document.getElementById(element).innerHTML = "$ " + currentPrice;
 }
 
 function checkStatus(response) {
@@ -39,13 +39,15 @@ async function printChart(chart, data, hexColor) {
 
   let btcChart = document.getElementById(chart).getContext('2d');
 
-  let gradient = btcChart.createLinearGradient(0, 0, 0, 400);
+  let gradient = btcChart.createLinearGradient(0, 0, 0, 1000);
 
   gradient.addColorStop(0, hexColor);
   gradient.addColorStop(1, "#fff");
 
-  Chart.defaults.global.defaultFontFamily = 'Red Hat Text';
+  Chart.defaults.global.defaultFontFamily = 'Montserrat, sans-serif';
   Chart.defaults.global.defaultFontSize = 12;
+  Chart.defaults.global.defaultFontColor = "#303030";
+  Chart.defaults.global.elements.point.borderColor = "#303030";
 
   createBtcChart = new Chart(btcChart, {
     type: 'line',
@@ -55,21 +57,45 @@ async function printChart(chart, data, hexColor) {
         label: '$',
         data: prices,
         backgroundColor: gradient,
-        borderColor: hexColor,
-        borderJoinStyle: 'round',
-        borderCapStyle: 'round',
-        borderWidth: 3,
         pointRadius: 0,
-        pointHitRadius: 10,
-        lineTension: .2,
+        pointHitRadius: 5,
+        borderColor: "#303030",
+        borderWidth: 2
       }]
     },
 
     options: {
-      title: {
-        display: false,
-        text: 'Heckin Chart!',
-        fontSize: 35
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            fontStyle: "bold",
+            maxTicksLimit	:10,
+            
+            callback: function(tick, index, array) {
+              if(window.innerWidth < 400)
+                return (index % 3) ? "" : tick;
+              
+              if(window.innerWidth < 900)
+                return (index % 2) ? "" : tick;
+                
+              return tick;
+            }
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            fontStyle: "bold",
+            maxTicksLimit	:10,
+            callback: function(tick, index, array) {
+              if(window.innerWidth < 900)
+                  return (index % 2) ? "" : tick;
+                
+                return tick;
+            }
+          }
+        }]
+      
       },
 
       legend: {
@@ -78,33 +104,20 @@ async function printChart(chart, data, hexColor) {
 
       layout: {
         padding: {
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 0
+          left: 15,
+          right: 15
         }
       },
 
-      scales: {
-        xAxes: [{
-          gridLines: {}
-        }],
-        yAxes: [{
-          gridLines: {}
-        }]
-      },
 
       tooltips: {
         callbacks: {
-          //This removes the tooltip title
           title: function() {}
         },
-        //this removes legend color
         displayColors: false,
+        mode: "nearest",
         yPadding: 10,
         xPadding: 10,
-        position: 'nearest',
-        caretSize: 10,
         backgroundColor: 'rgba(255,255,255,.9)',
         bodyFontSize: 15,
         bodyFontColor: '#303030' 
@@ -126,3 +139,9 @@ updatePrice(cosmosData, "atomPrice");
 printChart("btcChart", btcData, "#f7931a")
 printChart("cosmosChart", cosmosData, "#133b90")
 printChart("ethereumChart", ethData, "#141414")
+
+// window.addEventListener("resize", () => {
+//   printChart("btcChart", btcData, "#f7931a")
+//   printChart("cosmosChart", cosmosData, "#133b90")
+//   printChart("ethereumChart", ethData, "#141414")
+// })
