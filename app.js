@@ -30,16 +30,12 @@ function checkStatus(response) {
 
 
 
-let createBtcChart;
-let createCosmosChart;
-let createethereumChart;
-  
 async function printChart(chart, data, hexColor) {
   let { times, prices } = await data;
 
-  let btcChart = document.getElementById(chart).getContext('2d');
+  let ctx = document.getElementById(chart).getContext('2d');
 
-  let gradient = btcChart.createLinearGradient(0, 0, 0, 1000);
+  let gradient = ctx.createLinearGradient(0, 0, 0, 1000);
 
   gradient.addColorStop(0, hexColor);
   gradient.addColorStop(1, "#fff");
@@ -49,7 +45,7 @@ async function printChart(chart, data, hexColor) {
   Chart.defaults.global.defaultFontColor = "#303030";
   Chart.defaults.global.elements.point.borderColor = "#303030";
 
-  createBtcChart = new Chart(btcChart, {
+  let newChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: times,
@@ -128,20 +124,67 @@ async function printChart(chart, data, hexColor) {
 
 
 
-let btcData = returnApiData("BTC");  
-let cosmosData = returnApiData("ATOM");
-let ethData = returnApiData("ETH");
+function initilizeOptions(){
+  const currencies = ["BTC", "ETH", "Cosmos"];
+  const select = document.getElementById("checkboxes");
 
-updatePrice(btcData, "btcPrice");
-updatePrice(ethData, "ethPrice");
-updatePrice(cosmosData, "atomPrice");
+   currencies.forEach(c => {
+     const label = document.createElement("label");
+     label.setAttribute("for",c);
+     label.innerHTML = c;
+     const input = document.createElement("input");
+     input.type = "checkbox";
+     input.id = c;
 
-printChart("btcChart", btcData, "#f7931a")
-printChart("cosmosChart", cosmosData, "#133b90")
-printChart("ethereumChart", ethData, "#141414")
+     label.appendChild(input);
 
-// window.addEventListener("resize", () => {
-//   printChart("btcChart", btcData, "#f7931a")
-//   printChart("cosmosChart", cosmosData, "#133b90")
-//   printChart("ethereumChart", ethData, "#141414")
-// })
+      select.appendChild(label);
+  });
+
+}
+
+
+function showCheckboxes(hide) {
+  let checkboxes = document.getElementById("checkboxes");
+  if(hide){
+    checkboxes.style.display = "none"
+  }
+  else{
+    const display = checkboxes.style.display;
+    checkboxes.style.display = display == "block" ? "none" : "block"
+  }
+}
+
+
+
+document.getElementById("cryptoSelect").addEventListener("click", (e) =>{
+  e.stopPropagation();
+  showCheckboxes(false);
+});
+
+document.getElementById("checkboxes").addEventListener("click", (e) =>{
+  e.stopPropagation();
+});
+
+window.addEventListener("click", (e) => {
+  showCheckboxes(true);
+});
+
+
+(function() {
+  let btcData = returnApiData("BTC");  
+  let cosmosData = returnApiData("ATOM");
+  let ethData = returnApiData("ETH");
+  
+  updatePrice(btcData, "btcPrice");
+  updatePrice(ethData, "ethPrice");
+  updatePrice(cosmosData, "atomPrice");
+  
+  printChart("btcChart", btcData, "#f7931a");
+  printChart("cosmosChart", cosmosData, "#133b90");
+  printChart("ethereumChart", ethData, "#141414");
+
+  initilizeOptions();
+})();
+
+
