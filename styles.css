@@ -80,11 +80,33 @@ canvas {
   }
 }
 
-.multiselect {
+@media (max-width: 700px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.multiselect, .select {
+  margin: 10px;
   cursor: pointer;
 }
 
-.multiselect:active {
+.multiselect:active, .select:active {
   outline: none;
   border: none;
 }
@@ -104,29 +126,30 @@ canvas {
   color: white;
 }
 
-#checkboxes {
+.checkboxes, .labels {
   border-radius: 10px;
   width: 200px;
   position: absolute;
   display: none;
   background-color: transparent;
-  -webkit-backdrop-filter: brightness(0.8) blur(4px);
-          backdrop-filter: brightness(0.8) blur(4px);
+  color: white;
+  -webkit-backdrop-filter: brightness(0.4) blur(4px);
+          backdrop-filter: brightness(0.4) blur(4px);
 }
 
-#checkboxes label, #checkboxes input {
+.checkboxes label, .checkboxes input, .labels label {
   border-radius: 10px;
   cursor: pointer;
   margin: 5px;
 }
 
-#checkboxes label {
+.checkboxes label, .labels label {
   font-weight: bold;
   display: block;
   height: 40px;
 }
 
-#checkboxes label:hover {
+.checkboxes label:hover, .labels label:hover {
   background-color: #303030;
   color: white;
   -webkit-transition: 0.5s;

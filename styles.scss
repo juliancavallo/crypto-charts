@@ -18,6 +18,7 @@ canvas{
     width: 100% !important;
 }
 
+
 .charts{
     display: flex;
     flex-direction: row;
@@ -53,14 +54,27 @@ canvas{
 }
 
 @media (max-width: 900px) {
-
     .chart-info{
         font-size: 0.7rem;
     }
-
 }
 
-.multiselect {
+@media (max-width: 700px) {
+    h1{
+        font-size: 1.5rem;
+    }
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+
+.multiselect, .select {
+    margin: 10px;
     cursor: pointer;
 
     &:active{
@@ -84,29 +98,30 @@ canvas{
     }
 }
 
-#checkboxes {
+.checkboxes, .labels {
     border-radius: 10px;
     width: 200px;
     position: absolute;
     display: none;
     background-color: transparent;
-    backdrop-filter: brightness(0.8) blur(4px);
+    color: white;
+    backdrop-filter: brightness(0.4) blur(4px);
 }
 
-#checkboxes label, #checkboxes input {
+.checkboxes label, .checkboxes input, .labels label {
     
     border-radius: 10px;
     cursor: pointer;
     margin: 5px;
 }
 
-#checkboxes label{
+.checkboxes label, .labels label{
     font-weight: bold;
     display: block;
     height: 40px;
 }
 
-#checkboxes label:hover {
+.checkboxes label:hover, .labels label:hover {
     background-color: #303030;
     color: white;
     transition: 0.5s;
