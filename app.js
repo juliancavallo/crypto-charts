@@ -122,9 +122,11 @@ async function printChart(chart, data, hexColor) {
         mode: "nearest",
         yPadding: 10,
         xPadding: 10,
-        backgroundColor: 'rgba(255,255,255,.9)',
+        backgroundColor: '#FFF',
         bodyFontSize: 15,
-        bodyFontColor: '#303030' 
+        bodyFontColor: '#303030',
+        borderWidth: 1,
+        borderColor: "#303030"
       }
     }
   });
