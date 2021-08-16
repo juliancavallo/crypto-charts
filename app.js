@@ -142,8 +142,8 @@ function initializeCharts(range){
   updatePrice(btcData, "btcPrice");
   updatePrice(ethData, "ethPrice");
   updatePrice(cosmosData, "atomPrice");
-  updatePrice(cosmosData, "xrpPrice");
-  updatePrice(cosmosData, "adaPrice");
+  updatePrice(xrpData, "xrpPrice");
+  updatePrice(adaData, "adaPrice");
   
   printChart("btcChart", btcData, "#f7931a");
   printChart("cosmosChart", cosmosData, "#133b90");

@@ -146,7 +146,7 @@ canvas {
 .checkboxes label, .labels label {
   font-weight: bold;
   display: block;
-  height: 40px;
+  padding: 10px;
 }
 
 .checkboxes label:hover, .labels label:hover {
